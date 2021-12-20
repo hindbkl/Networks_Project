@@ -1,15 +1,19 @@
 package Main;
 
 import Controller.HeadController;
+import Controller.MessagesController;
 import Model.User;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class Main extends Application implements HeadController.HeadListener {
 
     private HeadController headController;
+    private MessagesController messagesController;
     private Stage stage;
     private User user;
 
@@ -18,7 +22,7 @@ public class Main extends Application implements HeadController.HeadListener {
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) {
         //TODO : load DBs
         this.stage = stage;
         headController = new HeadController(this, stage);
@@ -35,9 +39,14 @@ public class Main extends Application implements HeadController.HeadListener {
     }
 
     @Override
-    public void logIn(User user) {
+    public void logIn(User user) throws IOException {
         this.user = user;
-        headController.show();
+    }
+
+    @Override
+    public void logOut() {
+        System.out.println("log out user");
+        //log out user from db
     }
 
     //TODO : rajouter onClose()

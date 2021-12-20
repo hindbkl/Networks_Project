@@ -8,10 +8,6 @@ public class MessagesView {
     private TextField searchField;
     @FXML
     private TextField messageField;
-    @FXML
-    private Button sendButton;
-    @FXML
-    private Button searchButton;
 
     private MessageViewListener listener;
 
@@ -21,17 +17,24 @@ public class MessagesView {
 
     public void onSendButton() throws Exception {
         String message = messageField.getText();
-        listener.onSendButton(message);
+        if (!message.equals(""))
+            listener.onSendButton(message);
     }
 
     public void onSearchButton() throws Exception {
         String searched = searchField.getText();
-        listener.onSearchButton(searched);
+        if (!searched.equals(""))
+            listener.onSearchButton(searched);
+    }
+
+    public void onLogOutButton() throws Exception {
+        listener.onLogoutButton();
     }
 
     public interface MessageViewListener {
         void onSendButton(String message) throws Exception;
         void onSearchButton(String searched) throws Exception;
+        void onLogoutButton() throws Exception;
     }
 }
 

@@ -13,11 +13,13 @@ public class MessagesController implements MessagesView.MessageViewListener {
 
     private final MessagesListener listener;
     private final Stage stage;
+    private User user;
     private MessagesView messagesView;
 
-    public MessagesController(MessagesListener listener, Stage stage) {
+    public MessagesController(MessagesListener listener, Stage stage, User user) {
         this.stage = stage;
         this.listener = listener;
+        this.user = user;
     }
 
     public void show() throws IOException {
@@ -50,8 +52,15 @@ public class MessagesController implements MessagesView.MessageViewListener {
         listener.onSearchAsked();
     }
 
+    @Override
+    public void onLogoutButton() throws Exception {
+        listener.onLogoutAsked();
+        //log out user from db
+    }
+
     public interface MessagesListener {
         void onSendAsked() throws IOException;
         void onSearchAsked() throws IOException;
+        void onLogoutAsked() throws IOException;
     }
 }

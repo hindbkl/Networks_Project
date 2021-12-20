@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.User;
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import javafx.stage.Stage;
 import Main.Main;
 import java.io.IOException;
@@ -27,13 +28,13 @@ public class HeadController implements LoginController.LoginListener, RegisterCo
         }
     }
     @Override
-    public void onLoginAsked(User user) {
+    public void onLoginAsked(User user) throws IOException {
         listener.logIn(user);
-        messagesController = new MessagesController(this, stage);
+        messagesController = new MessagesController(this, stage, user);
         try {
             messagesController.show();
         } catch (IOException e) {
-            Main.showError("messages page");
+        Main.showError("messages page");
         }
     }
 
@@ -50,7 +51,9 @@ public class HeadController implements LoginController.LoginListener, RegisterCo
 
     @Override
     public void onSendAsked() {
-        //refresh page with new messages
+        System.out.println("message sent");
+        // add new messages to interface
+        // refresh page with new messages
         try {
             messagesController.show();
         } catch (IOException e) {
@@ -62,6 +65,12 @@ public class HeadController implements LoginController.LoginListener, RegisterCo
     public void onSearchAsked() {
         //refresh page with right results
         System.out.println("search asked");
+    }
+
+    @Override
+    public void onLogoutAsked() throws IOException {
+        loginController.show();
+        listener.logOut();
     }
 
     @Override
@@ -83,6 +92,7 @@ public class HeadController implements LoginController.LoginListener, RegisterCo
     }
 
     public interface HeadListener {
-        void logIn(User user);
+        void logIn(User user) throws IOException;
+        void logOut() throws IOException;
     }
 }
