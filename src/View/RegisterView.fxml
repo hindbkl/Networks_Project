@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.RegisterView">
+    <!--fx:define>
+        <Image fx:id="backImage" url="@../../images/back.png" />
+    </fx:define-->
+
+    <children>
+      <Label layoutX="271.0" layoutY="90.0" text="Registration">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <TextField fx:id="usernameField" layoutX="260.0" layoutY="170.0" prefHeight="32.0" prefWidth="181.0" promptText="Username" />
+        <PasswordField fx:id="pwField" layoutX="260.0" layoutY="215.0" prefHeight="32.0" prefWidth="181.0" promptText="Password" />
+        <PasswordField fx:id="confirmPwField" layoutX="260.0" layoutY="260.0" prefHeight="32.0" prefWidth="181.0" promptText="Confirm password" />
+        <Label fx:id="errorMessage" alignment="TOP_LEFT" layoutX="261.0" layoutY="342.0" prefHeight="134.0" prefWidth="181.0" text="Error message" textFill="#d02a2a" visible="false" wrapText="true" />
+        <Button fx:id="registerButton" layoutX="312.0" layoutY="303.0" mnemonicParsing="false" onAction="#onRegisterButton" prefHeight="30.0" prefWidth="77.0" text="Register">
+           <font>
+             <Font size="14.0" />
+         </font>
+       </Button>
+        <Button fx:id="backButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onBackButton" text="Back" />
+        <!--Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false">
+            <graphic>
+                <ImageView preserveRatio="true">
+               <viewport>
+                  <Rectangle2D width="15.0" />
+               </viewport></ImageView>
+            </graphic>
+        </Button-->
+   </children>
+</AnchorPane>

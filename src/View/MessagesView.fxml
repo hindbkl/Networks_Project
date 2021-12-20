@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml/1">
+   <right>
+      <BorderPane prefHeight="451.0" prefWidth="508.0" BorderPane.alignment="CENTER">
+         <bottom>
+            <AnchorPane fx:id="writeMessage" prefHeight="34.0" prefWidth="500.0" BorderPane.alignment="CENTER">
+               <children>
+                  <TextField fx:id="messageField" prefHeight="37.0" prefWidth="441.0" promptText="Write message" />
+                  <Button fx:id="sendButton" layoutX="441.0" mnemonicParsing="false" onAction="#onSendButton" prefHeight="37.0" prefWidth="60.0" text="Send" />
+               </children></AnchorPane>
+         </bottom>
+         <center>
+            <ScrollPane fx:id="messagesDisplay" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+              </content>
+            </ScrollPane>
+         </center>
+      </BorderPane>
+   </right>
+   <left>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <top>
+            <AnchorPane fx:id="searchBar" prefHeight="45.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Separator prefWidth="200.0" />
+                  <TextField fx:id="searchField" prefHeight="45.0" prefWidth="148.0" promptText="Search..." />
+                  <Button fx:id="searchButton" layoutX="148.0" layoutY="-1.0" mnemonicParsing="false" onAction="#onSearchButton" prefHeight="46.0" prefWidth="52.0" text="Search" />
+               </children></AnchorPane>
+         </top>
+         <bottom>
+            <ScrollPane fx:id="contacts" prefHeight="408.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="205.0" prefWidth="200.0" />
+              </content>
+            </ScrollPane>
+         </bottom>
+      </BorderPane>
+   </left>
+   <top>
+      <BorderPane prefHeight="46.0" prefWidth="700.0" BorderPane.alignment="CENTER">
+         <center>
+            <Label prefHeight="30.0" prefWidth="97.0" text="Messages" textAlignment="CENTER" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+         </center>
+         <left>
+            <Button fx:id="logoutButton" mnemonicParsing="false" onAction="#onLogOutButton" prefHeight="46.0" prefWidth="59.0" text="Log out" BorderPane.alignment="CENTER" />
+         </left>
+      </BorderPane>
+   </top>
+</BorderPane>

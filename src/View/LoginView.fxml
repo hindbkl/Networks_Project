@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.LoginView">
+   <children>
+      <Label layoutX="278.0" layoutY="91.0" text="Messenger">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <TextField fx:id="usernameField" layoutX="260.0" layoutY="200.0" prefHeight="32.0" prefWidth="181.0" promptText="Username" />
+      <PasswordField fx:id="pwField" layoutX="260.0" layoutY="250.0" prefHeight="32.0" prefWidth="181.0" promptText="Password" />
+      <Button fx:id="loginButton" layoutX="313.0" layoutY="294.0" mnemonicParsing="false" onAction="#onLogInButton" prefHeight="32.0" prefWidth="76.0" text="Log in">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Label fx:id="errorMessage" alignment="TOP_LEFT" layoutX="260.0" layoutY="340.0" prefHeight="85.0" prefWidth="181.0" text="Error message" textFill="#d02a2a" visible="false" wrapText="true" />
+      <Hyperlink fx:id="registerLink" layoutX="305.0" layoutY="159.0" onAction="#onRegisterLink" text="Register here">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Hyperlink>
+   </children>
+</AnchorPane>
