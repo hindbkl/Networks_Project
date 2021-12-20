@@ -1,7 +1,7 @@
 package Controller;
 
+import Model.Database;
 import Model.User;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import javafx.stage.Stage;
 import Main.Main;
 import java.io.IOException;
@@ -12,6 +12,7 @@ public class HeadController implements LoginController.LoginListener, RegisterCo
     private LoginController loginController;
     private RegisterController registerController;
     private MessagesController messagesController;
+    private Database database;
     //si login, user.setConnected = true;
 
     public HeadController(HeadListener listener, Stage stage) {
@@ -90,6 +91,7 @@ public class HeadController implements LoginController.LoginListener, RegisterCo
             Main.showError("log in page");
         }
     }
+
 
     public interface HeadListener {
         void logIn(User user) throws IOException;

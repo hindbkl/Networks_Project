@@ -1,21 +1,25 @@
 package Main;
 
 import Controller.HeadController;
-import Controller.MessagesController;
+import Model.Database;
 import Model.User;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 
 public class Main extends Application implements HeadController.HeadListener {
 
     private HeadController headController;
-    private MessagesController messagesController;
     private Stage stage;
     private User user;
+    // Database
+    private final String CONFIG_FILE = "src/Utils/postgresql-config.txt";
+    private final String TABLES_FILE = "src/Utils/generateTables.sql" ;
+    private Database database;
 
     public static void main(String[] args) {
         launch(args);
@@ -23,7 +27,8 @@ public class Main extends Application implements HeadController.HeadListener {
 
     @Override
     public void start(Stage stage) {
-        //TODO : load DBs
+        loadDB();
+
         this.stage = stage;
         headController = new HeadController(this, stage);
         headController.show();
@@ -49,6 +54,17 @@ public class Main extends Application implements HeadController.HeadListener {
         //log out user from db
     }
 
-    //TODO : rajouter onClose()
+    /* TODO
+    @Override
+    public void closePage() {
+        if (user.isConnected()){
+            user.setConnected(false);
+        }
+    }*/
 
+    public void loadDB() {
+        database = new Database(new File(CONFIG_FILE));
+        String create_tables = database.getQuery(new File(TABLES_FILE));
+        database.executeQuery(create_tables);
+    }
 }

@@ -56,4 +56,7 @@ public class User {
         return username;
     }
 
+    public boolean isConnected() {
+        return connected;
+    }
 }

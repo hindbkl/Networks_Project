@@ -1,6 +1,6 @@
 package Controller;
 
-import Model.Messages;
+import Model.Database;
 import Model.User;
 import View.MessagesView;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +15,7 @@ public class MessagesController implements MessagesView.MessageViewListener {
     private final Stage stage;
     private User user;
     private MessagesView messagesView;
+    private Database database;
 
     public MessagesController(MessagesListener listener, Stage stage, User user) {
         this.stage = stage;

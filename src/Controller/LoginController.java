@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Database;
 import Model.User;
 import View.LoginView;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +14,7 @@ public class LoginController implements LoginView.LoginViewListener{
     private final LoginListener listener;
     private final Stage stage;
     private LoginView loginView;
+    private Database database;
 
     public LoginController(LoginListener listener, Stage stage){
         this.stage = stage;

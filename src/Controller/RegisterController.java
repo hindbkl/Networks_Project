@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Database;
 import Model.User;
 import View.RegisterView;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +13,7 @@ public class RegisterController implements RegisterView.RegisterViewListener {
     private final RegisterListener listener;
     private final Stage stage;
     private RegisterView registerView;
+    private Database database;
 
     public RegisterController(RegisterListener listener, Stage stage) {
         this.stage = stage;
