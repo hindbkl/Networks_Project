@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class RegisterController implements RegisterView.RegisterViewListener {
     private final RegisterListener listener;
@@ -15,9 +16,10 @@ public class RegisterController implements RegisterView.RegisterViewListener {
     private RegisterView registerView;
     private Database database;
 
-    public RegisterController(RegisterListener listener, Stage stage) {
+    public RegisterController(RegisterListener listener, Stage stage, Database database) {
         this.stage = stage;
         this.listener = listener;
+        this.database = database;
     }
 
     public void show() throws IOException {
@@ -37,7 +39,7 @@ public class RegisterController implements RegisterView.RegisterViewListener {
     @Override
     public void onRegisterButton(String username, String pw, String confirmpw) throws Exception {
         if (!User.checkValidUsername(username)){
-            registerView.setErrorMessage("Username must :\n- contain at least 8 characters\n- only contain letters and digits\n- start by a letter");
+            registerView.setErrorMessage("Username must :\n- start by a letter\n- only contain letters and digits\n- contain at least 8 characters");
         }
         else if (!User.checkValidPw(pw)){
             registerView.setErrorMessage("Password must contain at least:\n- 8 characters\n- 1 digit\n- 1 capital letter\n- 1 special character");
@@ -46,9 +48,16 @@ public class RegisterController implements RegisterView.RegisterViewListener {
             registerView.setErrorMessage("Passwords should be the same");
         }
         else {
-            System.out.println("create user : " + username);
-            listener.onRegisterAsked();
-            // check si dans db, sinon ajouter user (+ msg d'erreur)
+            ArrayList<String> userFound = database.executeQuery("SELECT username FROM users WHERE username = '" + username + "';");
+            if (userFound.size() != 0){
+                registerView.setErrorMessage("Username already exists.");
+            }
+            else {
+                System.out.println("create user : " + username);
+                User user = new User(username, pw);
+                database.executeQuery("INSERT into users (username, password, publickey, connected) values ('" + username + "','" + pw + "','" + user.getPublickey() + "', false);");
+                listener.onRegisterAsked();
+            }
         }
     }
 

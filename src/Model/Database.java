@@ -101,7 +101,7 @@ public class Database {
             res.close();
 
         } catch (SQLException throwables) {
-            System.err.println(throwables.getMessage());
+            System.err.println("");//throwables.getMessage());
         }
         return queryResult;
     }
@@ -122,5 +122,27 @@ public class Database {
             e.printStackTrace();
         }
         return query;
+    }
+
+    public ArrayList<String> getMessages(String user, String contact) {
+        ArrayList<String> result = executeQuery("SELECT sender, timestamp, content FROM messages WHERE (sender = '" + user
+                + "' AND receiver = '" + contact + "') OR (receiver = '" + user + "' AND sender = '" + contact + "')"); //TODO : décrypter
+        ArrayList<String> messages = new ArrayList<>();
+        for (String s1 : result){
+            String s2 = s1.replace("\t","\n");
+            messages.add(s2);
+        }
+        return messages;
+    }
+
+    public ArrayList<String[]> getContacts(String user){
+        ArrayList<String> contacts = executeQuery("SELECT username, connected FROM users WHERE username <> '" + user + "'");
+        ArrayList<String[]> formatted = new ArrayList<>();
+        for (String res : contacts){
+            String[] s = res.split("\t");
+            formatted.add(s);
+        }
+
+        return formatted;
     }
 }

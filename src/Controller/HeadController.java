@@ -13,15 +13,15 @@ public class HeadController implements LoginController.LoginListener, RegisterCo
     private RegisterController registerController;
     private MessagesController messagesController;
     private Database database;
-    //si login, user.setConnected = true;
 
-    public HeadController(HeadListener listener, Stage stage) {
+    public HeadController(HeadListener listener, Stage stage, Database database) {
         this.listener = listener;
         this.stage = stage;
+        this.database = database;
     }
 
     public void show() {
-        loginController = new LoginController(this, stage);
+        loginController = new LoginController(this, stage, database);
         try {
             loginController.show();
         } catch (IOException e) {
@@ -31,7 +31,7 @@ public class HeadController implements LoginController.LoginListener, RegisterCo
     @Override
     public void onLoginAsked(User user) throws IOException {
         listener.logIn(user);
-        messagesController = new MessagesController(this, stage, user);
+        messagesController = new MessagesController(this, stage, user, database);
         try {
             messagesController.show();
         } catch (IOException e) {
@@ -41,31 +41,13 @@ public class HeadController implements LoginController.LoginListener, RegisterCo
 
     @Override
     public void onRegisterLinkAsked() {
-        registerController = new RegisterController(this, stage);
+        registerController = new RegisterController(this, stage, database);
         try {
             registerController.show();
         } catch (IOException e) {
             Main.showError("registration page");
         }
 
-    }
-
-    @Override
-    public void onSendAsked() {
-        System.out.println("message sent");
-        // add new messages to interface
-        // refresh page with new messages
-        try {
-            messagesController.show();
-        } catch (IOException e) {
-            Main.showError("messages page");
-        }
-    }
-
-    @Override
-    public void onSearchAsked() {
-        //refresh page with right results
-        System.out.println("search asked");
     }
 
     @Override
@@ -91,7 +73,6 @@ public class HeadController implements LoginController.LoginListener, RegisterCo
             Main.showError("log in page");
         }
     }
-
 
     public interface HeadListener {
         void logIn(User user) throws IOException;

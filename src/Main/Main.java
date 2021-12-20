@@ -9,7 +9,6 @@ import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.io.IOException;
 
 public class Main extends Application implements HeadController.HeadListener {
 
@@ -28,9 +27,8 @@ public class Main extends Application implements HeadController.HeadListener {
     @Override
     public void start(Stage stage) {
         loadDB();
-
         this.stage = stage;
-        headController = new HeadController(this, stage);
+        headController = new HeadController(this, stage, database);
         headController.show();
     }
 
@@ -44,23 +42,15 @@ public class Main extends Application implements HeadController.HeadListener {
     }
 
     @Override
-    public void logIn(User user) throws IOException {
+    public void logIn(User user) {
         this.user = user;
     }
 
     @Override
     public void logOut() {
+        this.user = null;
         System.out.println("log out user");
-        //log out user from db
     }
-
-    /* TODO
-    @Override
-    public void closePage() {
-        if (user.isConnected()){
-            user.setConnected(false);
-        }
-    }*/
 
     public void loadDB() {
         database = new Database(new File(CONFIG_FILE));

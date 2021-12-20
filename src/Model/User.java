@@ -2,16 +2,17 @@ package Model;
 
 public class User {
     private String username, pw, publickey; //à générer (pt àpd username + pw)
-    private boolean connected = false;
 
     public User(String username, String pw){
         this.username = username;
         this.pw = pw;
+        this.publickey = "PK_test"; //TODO : generate public key
     }
 
-    public User(User user){
-        this.username = user.username;
-        this.pw = user.pw;
+    public User(String username, String pw, String publickey){
+        this.username = username;
+        this.pw = pw;
+        this.publickey = publickey;
     }
 
     // username must start by letter, be at least 8 char long, and only contain letters and digits
@@ -47,16 +48,15 @@ public class User {
         return (cap && dig && special);
     }
 
-
-    public void setConnected(boolean connected) {
-        this.connected = connected;
-    }
-
     public String toString(){
         return username;
     }
 
-    public boolean isConnected() {
-        return connected;
+    public String getPublickey() {
+        return publickey;
+    }
+
+    public String getUsername() {
+        return username;
     }
 }

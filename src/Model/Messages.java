@@ -1,18 +1,18 @@
 package Model;
 
-import java.time.LocalDate;
-
 public class Messages extends Signal{
     private User receiver;
     private String content;
-    private LocalDate timestamp;
     private String SKsender, SKreceiver;
 
-    public Messages(User sender, User receiver, String content, LocalDate timestamp){
+    public Messages(User sender, User receiver, String content){
         super(sender, "MESSAGE");
         this.receiver = receiver;
         this.content = content;
-        this.timestamp = timestamp;
+    }
+
+    public void addMessageToDb(Database database){
+        //TODO : ajout à la db
     }
 }
 

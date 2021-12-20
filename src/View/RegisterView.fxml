@@ -10,21 +10,24 @@
     </fx:define-->
 
     <children>
-      <Label layoutX="271.0" layoutY="90.0" text="Registration">
+      <Label layoutX="271.0" layoutY="79.0" text="Registration">
          <font>
             <Font size="30.0" />
          </font>
       </Label>
-      <TextField fx:id="usernameField" layoutX="260.0" layoutY="170.0" prefHeight="32.0" prefWidth="181.0" promptText="Username" />
+      <TextField fx:id="usernameField" layoutX="260.0" layoutY="163.0" prefHeight="32.0" prefWidth="181.0" promptText="Username" />
         <PasswordField fx:id="pwField" layoutX="260.0" layoutY="215.0" prefHeight="32.0" prefWidth="181.0" promptText="Password" />
-        <PasswordField fx:id="confirmPwField" layoutX="260.0" layoutY="260.0" prefHeight="32.0" prefWidth="181.0" promptText="Confirm password" />
-        <Label fx:id="errorMessage" alignment="TOP_LEFT" layoutX="261.0" layoutY="342.0" prefHeight="134.0" prefWidth="181.0" text="Error message" textFill="#d02a2a" visible="false" wrapText="true" />
-        <Button fx:id="registerButton" layoutX="312.0" layoutY="303.0" mnemonicParsing="false" onAction="#onRegisterButton" prefHeight="30.0" prefWidth="77.0" text="Register">
+        <PasswordField fx:id="confirmPwField" layoutX="260.0" layoutY="269.0" prefHeight="32.0" prefWidth="181.0" promptText="Confirm password" />
+        <Label fx:id="errorMessage" alignment="TOP_LEFT" layoutX="261.0" layoutY="351.0" prefHeight="134.0" prefWidth="181.0" text="Error message" textFill="#d02a2a" visible="false" wrapText="true" />
+        <Button fx:id="registerButton" layoutX="312.0" layoutY="312.0" mnemonicParsing="false" onAction="#onRegisterButton" prefHeight="30.0" prefWidth="77.0" text="Register">
            <font>
              <Font size="14.0" />
          </font>
        </Button>
         <Button fx:id="backButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onBackButton" text="Back" />
+      <Label layoutX="261.0" layoutY="146.0" text="Username" />
+      <Label layoutX="261.0" layoutY="198.0" text="Password" />
+      <Label layoutX="261.0" layoutY="252.0" text="Confirm password" />
         <!--Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false">
             <graphic>
                 <ImageView preserveRatio="true">
