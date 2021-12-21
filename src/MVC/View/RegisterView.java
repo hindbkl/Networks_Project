@@ -1,4 +1,4 @@
-package View;
+package MVC.View;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;

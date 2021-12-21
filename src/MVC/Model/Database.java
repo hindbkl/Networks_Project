@@ -3,7 +3,7 @@ Source of this file : BA3 INFO-H303 Project (authors : Sami Abdul Sater, Hind Ba
 Aim : connect to a database based on a configuration file
 */
 
-package Model;
+package MVC.Model;
 
 import java.io.*;
 import java.sql.*;
@@ -52,7 +52,7 @@ public class Database {
         try {
             System.out.println("Attempting connection to "+ dbName + "...");
 
-            // Main line
+            // MVC.Main line
             connection = DriverManager.getConnection(url, user, password);
 
             System.out.println("Connection to "+ dbName + " successful.");
@@ -122,27 +122,5 @@ public class Database {
             e.printStackTrace();
         }
         return query;
-    }
-
-    public ArrayList<String> getMessages(String user, String contact) {
-        ArrayList<String> result = executeQuery("SELECT sender, timestamp, content FROM messages WHERE (sender = '" + user
-                + "' AND receiver = '" + contact + "') OR (receiver = '" + user + "' AND sender = '" + contact + "')"); //TODO : décrypter
-        ArrayList<String> messages = new ArrayList<>();
-        for (String s1 : result){
-            String s2 = s1.replace("\t","\n");
-            messages.add(s2);
-        }
-        return messages;
-    }
-
-    public ArrayList<String[]> getContacts(String user){
-        ArrayList<String> contacts = executeQuery("SELECT username, connected FROM users WHERE username <> '" + user + "'");
-        ArrayList<String[]> formatted = new ArrayList<>();
-        for (String res : contacts){
-            String[] s = res.split("\t");
-            formatted.add(s);
-        }
-
-        return formatted;
     }
 }

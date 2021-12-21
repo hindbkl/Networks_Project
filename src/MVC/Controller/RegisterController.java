@@ -1,25 +1,24 @@
-package Controller;
+package MVC.Controller;
 
-import Model.Database;
-import Model.User;
-import View.RegisterView;
+import MVC.Model.Server;
+import MVC.Model.User;
+import MVC.View.RegisterView;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class RegisterController implements RegisterView.RegisterViewListener {
     private final RegisterListener listener;
     private final Stage stage;
     private RegisterView registerView;
-    private Database database;
+    private Server server;
 
-    public RegisterController(RegisterListener listener, Stage stage, Database database) {
+    public RegisterController(RegisterListener listener, Stage stage, Server server) {
         this.stage = stage;
         this.listener = listener;
-        this.database = database;
+        this.server = server;
     }
 
     public void show() throws IOException {
@@ -48,14 +47,13 @@ public class RegisterController implements RegisterView.RegisterViewListener {
             registerView.setErrorMessage("Passwords should be the same");
         }
         else {
-            ArrayList<String> userFound = database.executeQuery("SELECT username FROM users WHERE username = '" + username + "';");
-            if (userFound.size() != 0){
+            if (server.findUser(username)){
                 registerView.setErrorMessage("Username already exists.");
             }
             else {
-                System.out.println("create user : " + username);
+                System.out.println("create user : " + username); //TODO : delete this line
                 User user = new User(username, pw);
-                database.executeQuery("INSERT into users (username, password, publickey, connected) values ('" + username + "','" + pw + "','" + user.getPublickey() + "', false);");
+                server.newUser(username, pw, user.getPublickey());
                 listener.onRegisterAsked();
             }
         }

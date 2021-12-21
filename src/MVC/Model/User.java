@@ -1,17 +1,17 @@
-package Model;
+package MVC.Model;
 
 public class User {
-    private String username, pw, publickey; //à générer (pt àpd username + pw)
+    private String username, password, publickey; //à générer (pt àpd username + pw)
 
-    public User(String username, String pw){
+    public User(String username, String password){
         this.username = username;
-        this.pw = pw;
+        this.password = password;
         this.publickey = "PK_test"; //TODO : generate public key
     }
 
-    public User(String username, String pw, String publickey){
+    public User(String username, String password, String publickey){
         this.username = username;
-        this.pw = pw;
+        this.password = password;
         this.publickey = publickey;
     }
 
@@ -48,13 +48,9 @@ public class User {
         return (cap && dig && special);
     }
 
-    public String toString(){
-        return username;
-    }
-
     public String getPublickey() {
         return publickey;
-    }
+    } //TODO : return la public key encryptée?
 
     public String getUsername() {
         return username;

@@ -1,9 +1,10 @@
-package Controller;
+package MVC.Controller;
 
-import Model.Database;
-import Model.User;
+import MVC.Main;
+import MVC.Model.Server;
+import MVC.Model.User;
 import javafx.stage.Stage;
-import Main.Main;
+
 import java.io.IOException;
 
 public class HeadController implements LoginController.LoginListener, RegisterController.RegisterListener, MessagesController.MessagesListener {
@@ -12,16 +13,16 @@ public class HeadController implements LoginController.LoginListener, RegisterCo
     private LoginController loginController;
     private RegisterController registerController;
     private MessagesController messagesController;
-    private Database database;
+    private Server server;
 
-    public HeadController(HeadListener listener, Stage stage, Database database) {
+    public HeadController(HeadListener listener, Stage stage, Server server) {
         this.listener = listener;
         this.stage = stage;
-        this.database = database;
+        this.server = server;
     }
 
     public void show() {
-        loginController = new LoginController(this, stage, database);
+        loginController = new LoginController(this, stage, server);
         try {
             loginController.show();
         } catch (IOException e) {
@@ -29,9 +30,8 @@ public class HeadController implements LoginController.LoginListener, RegisterCo
         }
     }
     @Override
-    public void onLoginAsked(User user) throws IOException {
-        listener.logIn(user);
-        messagesController = new MessagesController(this, stage, user, database);
+    public void onLoginAsked(User user) {
+        messagesController = new MessagesController(this, stage, user, server);
         try {
             messagesController.show();
         } catch (IOException e) {
@@ -41,19 +41,17 @@ public class HeadController implements LoginController.LoginListener, RegisterCo
 
     @Override
     public void onRegisterLinkAsked() {
-        registerController = new RegisterController(this, stage, database);
+        registerController = new RegisterController(this, stage, server);
         try {
             registerController.show();
         } catch (IOException e) {
             Main.showError("registration page");
         }
-
     }
 
     @Override
     public void onLogoutAsked() throws IOException {
         loginController.show();
-        listener.logOut();
     }
 
     @Override
@@ -75,7 +73,5 @@ public class HeadController implements LoginController.LoginListener, RegisterCo
     }
 
     public interface HeadListener {
-        void logIn(User user) throws IOException;
-        void logOut() throws IOException;
     }
 }

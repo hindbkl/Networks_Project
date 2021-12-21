@@ -1,25 +1,24 @@
-package Controller;
+package MVC.Controller;
 
-import Model.Database;
-import Model.User;
-import View.LoginView;
+import MVC.Model.Server;
+import MVC.Model.User;
+import MVC.View.LoginView;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class LoginController implements LoginView.LoginViewListener{
     private final LoginListener listener;
     private final Stage stage;
     private LoginView loginView;
-    private Database database;
+    private Server server;
 
-    public LoginController(LoginListener listener, Stage stage, Database database){
+    public LoginController(LoginListener listener, Stage stage, Server server){
         this.stage = stage;
         this.listener = listener;
-        this.database = database;
+        this.server = server;
     }
 
     public void show() throws IOException {
@@ -39,17 +38,16 @@ public class LoginController implements LoginView.LoginViewListener{
 
     @Override
     public void onLogInButton(String username, String password) throws Exception {
-        ArrayList<String> userFound = database.executeQuery("SELECT publickey FROM users WHERE username = '" + username + "' AND password = '" + password + "';");
-        if (userFound.size() != 0){
-            String connected = database.executeQuery("SELECT connected FROM users WHERE username = '" + username + "';").get(0);
-            if (connected.replace("\t", "").equals("f")){
-                String pk = userFound.get(0).replace("\t", "");
-                User user = new User(username, password, pk);
-                database.executeQuery("UPDATE users SET connected = true WHERE username = '" + user.getUsername() + "';");
+        String[] conn_pk = server.checkUser(username, password);
+        if (conn_pk != null){
+            if (conn_pk[0].equals("f")){
+                User user = new User(username, password, conn_pk[1]);
+                server.updateUserStatus(username, true);
                 listener.onLoginAsked(user);
             }
-            else
+            else {
                 loginView.setErrorMessage("User already connected");
+            }
         }
         else {
             loginView.setErrorMessage("Username or password incorrect");
