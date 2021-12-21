@@ -18,8 +18,14 @@ public class MessagesView {
 
     public void showContacts(ArrayList<String[]> contacts){
         contactsView.getItems().remove(0, contactsView.getItems().size()); //clean ListView
-        for (String[] i : contacts) //refill ListView
-            contactsView.getItems().add(i[0] + " (" + i[1] + ")");
+        for (String[] i : contacts){ //refill ListView
+            String status ="";
+            if (i[1].equals("f"))
+                status = "offline";
+            else
+                status = "online";
+            contactsView.getItems().add(i[0] + " (" + status + ")");
+        }
     }
 
     public void showMessages(ArrayList<String> messages){
