@@ -32,17 +32,17 @@ Database system :
 - Log in page :
 The first page that displays when you launch the code is the log in page, where you can enter your already existing username and the password that corresponds. By clicking on the log in button, if the username and password exist and correspond
 the page changes to the messages display. If the user is not registered yet, he can click on register to create a new account. 
-![](https://github.com/ULB-INFOF307/2021-groupe-13/blob/master/screenshots/login.png)
+![](https://github.com/hindbkl/Networks_Project/blob/master/images/login2.png)
 
 - Register page :
 On this page, the user has to enter a username, a password and confirm the password. By clicking on the register button, the program will verify if the informations he entered respect the rules
 for the password and username (at least 8 characters, the two passwords should be the same, etc...). If everything is verified, the new user will be created and he wil be sent back to the log in page. If the informations are
 not correct, the program will display an error message which tells what kind of error is encountered.
-![](https://github.com/ULB-INFOF307/2021-groupe-13/blob/master/screenshots/login.png)
+![](https://github.com/hindbkl/Networks_Project/blob/master/images/reg.png)
 
 - Messages page : 
 On the left of this page, the list of contacts is displayed, with a search bar above it. By writing any string in the search bar and clicking on the search button, the program displays a new list 
 of contacts whose name containes the string. By not writing anything in the search bar and clicking on the button, the program displays all the contacts. When you click on a contact, the program will display
 all the messages between the user and the contact (if they already talked to each other) on the right side of the page. After selecting a contact, the user can write any message on the message bar, and by clicking on the send button,
 the message is added to the list of messages above. The user can choose to click on the log out button too, which will disconnect the user and send him back to the log in page.
-![](https://github.com/ULB-INFOF307/2021-groupe-13/blob/master/screenshots/login.png)
+![](https://github.com/hindbkl/Networks_Project/blob/master/images/msg.png)
