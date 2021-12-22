@@ -24,8 +24,8 @@ Database system :
   - Name of the database (first line)
   - Name of the user (second line)
   - Password (third line) 
-- Run the server class
-- Run the main class
+- Run the server class once to instantiate the server
+- Run the main class everytime you want to connect with a user (different users can be connected at the same time)
 
 ## Using the application
 
