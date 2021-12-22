@@ -43,9 +43,7 @@ not correct, the program will display an error message which tells what kind of 
 ![](https://github.com/hindbkl/Networks_Project/blob/master/images/reg.png)
 
 - Messages page : 
-On the left of this page, the list of contacts is displayed, with a search bar above it. By writing any string in the search bar and clicking on the search button, the program displays a new list 
-of contacts whose name containes the string. By not writing anything in the search bar and clicking on the button, the program displays all the contacts. When you click on a contact, the program will display
-all the messages between the user and the contact (if they already talked to each other) on the right side of the page. After selecting a contact, the user can write any message on the message bar, and by clicking on the send button,
+On the left of this page, the list of contacts is displayed, with a search bar above it. By writing any string in the search bar and clicking on the search button, the program displays a new list of contacts whose name contains the string. By not writing anything in the search bar and clicking on the button, the program displays all the contacts. When you click on a contact, the program will display all the messages between the user and the contact (if they already talked to each other) on the right side of the page. After selecting a contact, the user can write any message on the message bar, and by clicking on the send button,
 the message is added to the list of messages above. The user can choose to click on the log out button too, which will disconnect the user and send him back to the log in page.
 
 ![](https://github.com/hindbkl/Networks_Project/blob/master/images/msg.png)
@@ -53,9 +51,11 @@ the message is added to the list of messages above. The user can choose to click
 ## Previous functional version 
 
 - Issues : 
-When adding encryption and undirect communication between client and server, unsolvable errors were raised. Before that, a version with direct access from client to server was implemented. This version can be found in commit e39ae3a (e39ae3a1b35f0aa67e368aa424a0a3c0484af40e - "Merge remote-tracking branch 'origin/master' into master").
+When adding encryption and undirect communication between client and server, unsolvable errors were raised. What works in the last version given in this git is : register, log in and password encrytpion/decryption. When logging in and trying to fetch contacts, the errors occur.
+
+Before that, a version with direct access from client to server was implemented. This version can be found in commit e39ae3a (e39ae3a1b35f0aa67e368aa424a0a3c0484af40e - "Merge remote-tracking branch 'origin/master' into master").
 
 - Direct client/server communication :
-In the version cited above, clients can register, login, and communicate from the same laptop. Here is the message view that it would give :
+In the version cited above, clients can register, login, and communicate. However, their passwords and messages are not encrypted. Here is an example of message view that it could give :
 
 ![](https://github.com/hindbkl/Networks_Project/blob/master/images/messages_ok.png)
