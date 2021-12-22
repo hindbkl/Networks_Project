@@ -58,7 +58,6 @@ public class ServerListener implements Runnable {
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-            } finally {
                 running = false;
             }
         }

@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 public class RegisterController implements RegisterView.RegisterViewListener {
     private final RegisterListener listener;
@@ -54,6 +55,7 @@ public class RegisterController implements RegisterView.RegisterViewListener {
                 System.out.println("create user : " + username); //TODO : delete this line
                 User user = new User(username, pw);
                 user.generateNewKeys();
+                TimeUnit.SECONDS.sleep(1);
                 server.newUser(username, pw, user.getPublicKey());
                 listener.onRegisterAsked();
             }

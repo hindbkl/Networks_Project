@@ -24,7 +24,7 @@ public class RSAUtils {
 
     private static final int KEY_SIZE = 2048;
     private static final String KEY_ALG = "RSA";
-    private static final String OUTPUT_FILE = "Keys/_usr";
+    private static final String OUTPUT_FILE = "Keys/usr_";
     private static final String SERVER_FILE = "Keys/srv";
     private static final String ALGORITHM = "RSA/ECB/OAEPWithSHA-256AndMGF1Padding";
 
@@ -43,7 +43,7 @@ public class RSAUtils {
         Key pvt = kp.getPrivate();
         Base64.Encoder encoder = Base64.getEncoder();
 
-        String fileName = user.getUsername() + OUTPUT_FILE + ".key";
+        String fileName = OUTPUT_FILE + user.getUsername() + ".key" ;
         File outputFile = new File(fileName);
         outputFile.createNewFile();
         Writer out = new FileWriter(outputFile);
@@ -52,7 +52,7 @@ public class RSAUtils {
         out.write("\n-----END RSA PRIVATE KEY-----\n");
         out.close();
 
-        fileName = user.getUsername() + OUTPUT_FILE + ".pub";
+        fileName = OUTPUT_FILE+ user.getUsername() + ".pub";
         outputFile = new File(fileName);
         outputFile.createNewFile();
         out = new FileWriter(outputFile);
@@ -95,7 +95,7 @@ public class RSAUtils {
     public static PublicKey getPublicKeyUser(User user){
         PublicKey publicKey = null;
         String fileName = "";
-        fileName = user.getUsername() + OUTPUT_FILE + ".pub";
+        fileName = OUTPUT_FILE + user.getUsername() + ".pub";
         byte[] key = null;
         Base64.Decoder decoder = Base64.getDecoder();
         try {
@@ -154,7 +154,7 @@ public class RSAUtils {
     public static PrivateKey getPrivateKeyUser(User user){
         PrivateKey privateKey = null;
         String fileName = "";
-        fileName = user.getUsername() + OUTPUT_FILE + ".key";
+        fileName = OUTPUT_FILE + user.getUsername() + ".key";
 
         byte[] key = null;
         Base64.Decoder decoder = Base64.getDecoder();

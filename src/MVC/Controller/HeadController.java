@@ -31,8 +31,9 @@ public class HeadController implements LoginController.LoginListener, RegisterCo
     }
     @Override
     public void onLoginAsked(User user) {
+        server.updateUser(user);
         messagesController = new MessagesController(this, stage, user, server);
-        server.update(user, messagesController);
+        server.update(messagesController);
         try {
             messagesController.show();
         } catch (IOException e) {

@@ -77,7 +77,6 @@ public class ClientHandler implements Runnable{
             }
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
             closeConnection();
         }
     }
@@ -142,6 +141,8 @@ public class ClientHandler implements Runnable{
      */
 
     private void returnContacts() throws SignatureException, NoSuchAlgorithmException, InvalidKeyException {
+        //TODO
+        System.out.println("usn-------"+userName);
         String message = ServerMessageProtocol.sendContacts(server.getContacts(userName));
         writeMessage(message);
     }
@@ -169,6 +170,7 @@ public class ClientHandler implements Runnable{
             String inputText = in.readLine();
             if (inputText == null) return;
             String[] parsedIn = inputText.split("[$]");
+            System.out.println(parsedIn[0]);//TODO
             if (parsedIn.length != 2) return;
             String[] decryptedIn = AESUtils.decryption(parsedIn[1],key[0],key[1]).split("[$]");
             if (parsedIn[0].equals("REG") && decryptedIn.length == 2 && !registered) {
@@ -253,7 +255,6 @@ public class ClientHandler implements Runnable{
             writeMessage(ServerMessageProtocol.confSecret(symKey[0],symKey[1],ip));
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
             closeConnection();
         }
         return symKey;

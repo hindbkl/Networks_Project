@@ -7,6 +7,9 @@ import Utils.Crypto.AESUtils;
 import Utils.Crypto.RSAUtils;
 import Utils.Crypto.SignatureUtils;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.jws.soap.SOAPBinding;
 import java.io.*;
 import java.net.Socket;
@@ -42,16 +45,19 @@ public class ClientSideServer {
             makeConnection();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
             closeConnection();
         }
     }
 
-    public void update(User usr, MessagesController mc) {
+    public void updateUser(User usr) {
+        //System.out.println("CSS user = ");
+        this.user = usr;
+    }
+
+    public void update(MessagesController mc) {
         threadExecutor = Executors.newSingleThreadExecutor();
         ServerListener serverHandler = new ServerListener(this, mc);
         threadExecutor.execute(serverHandler);
-        this.user = usr;
         this.sv = serverHandler;
     }
 
@@ -60,7 +66,7 @@ public class ClientSideServer {
             String inputText = in.readLine();
             if (inputText == null) return;
             String[] parsedIn = inputText.split("[$]");
-            if (parsedIn.length != 4 || !Objects.equals(parsedIn[0], "CON") || verifySignature(inputText)) return;
+            if (parsedIn.length != 4 || !Objects.equals(parsedIn[0], "CON") || !verifySignature(inputText)) return;
             this.key = AESUtils.generateKey();
             this.iV = AESUtils.generateIv();
             String message = UserMessageProtocol.symKeyMessage(key,iV);
@@ -68,7 +74,6 @@ public class ClientSideServer {
             inputText = in.readLine();
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
             closeConnection();
         }
     }
@@ -92,7 +97,6 @@ public class ClientSideServer {
 
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
             closeConnection();
         }
         return false;
@@ -110,7 +114,6 @@ public class ClientSideServer {
             return new String[]{parsedIn[0],parsedIn[1]};
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
             closeConnection();
         }
         return new String[]{"false","false"};
@@ -122,6 +125,7 @@ public class ClientSideServer {
             String message = UserMessageProtocol.queryGetContacts(user);
             writeMessage(message);
             String[] response = sv.getQueryResponse();
+            System.out.println("resp = "+response[0]);
             while (response == null) {
                 TimeUnit.MILLISECONDS.sleep(10);
                 response = sv.getQueryResponse();
@@ -137,7 +141,6 @@ public class ClientSideServer {
             return res;
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
             closeConnection();
         }
         return new ArrayList<>();
@@ -160,7 +163,6 @@ public class ClientSideServer {
 
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
             closeConnection();
         }
     }
@@ -186,7 +188,6 @@ public class ClientSideServer {
 
         }catch (Exception e) {
             e.printStackTrace();
-        } finally {
             closeConnection();
         }
         return new ArrayList<>();
@@ -199,7 +200,6 @@ public class ClientSideServer {
             String inputText = in.readLine();
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
             closeConnection();
         }
 
@@ -210,7 +210,6 @@ public class ClientSideServer {
             return connection.getInputStream();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
             closeConnection();
         }
         return null;
@@ -231,7 +230,7 @@ public class ClientSideServer {
         if (parsedRequest.length < 2) return false;
         String signature = parsedRequest[parsedRequest.length-1];
         String signed = request.substring(0,request.lastIndexOf("$"));
-
+        System.out.println(signed);//TODO
         return SignatureUtils.verify(signed,signature, RSAUtils.getPublicKeyServer());
     }
 }

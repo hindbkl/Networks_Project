@@ -16,9 +16,9 @@ import java.util.Date;
 
 public class ServerMessageProtocol {
     public static String authMessage(String ip) throws SignatureException, NoSuchAlgorithmException, InvalidKeyException {
-        String message = "CON$" + new Date() + "$" + ip + "$";
+        String message = "CON$" + new Date() + "$" + ip;
         String signature = SignatureUtils.signServer(message);
-        message += signature;
+        message += "$" + signature;
         return message;
     }
 

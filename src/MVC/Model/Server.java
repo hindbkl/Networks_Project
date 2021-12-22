@@ -13,6 +13,7 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SignatureException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -59,7 +60,6 @@ public class Server {
                         message = ServerMessageProtocol.sendMessage(username);
                     } catch (Exception e) {
                         e.printStackTrace();
-                    } finally {
                         users.closeConnection();
                     }
                     users.writeMessage(message);
@@ -77,13 +77,12 @@ public class Server {
                 ClientHandler clientThread = new ClientHandler(client,this);
                 clients.add(clientThread);
                 pool.execute(clientThread);
-                PrintWriter out = new PrintWriter(client.getOutputStream());
-                out.println("Connected");
-                out.flush();
+                //PrintWriter out = new PrintWriter(client.getOutputStream());
+                //out.println("Connected");
+                //out.flush();
             }
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
             closeConnections();
             listener.close();
         }
@@ -117,7 +116,7 @@ public class Server {
         }
         boolean[] result = new boolean[2];
         result[0] = Boolean.parseBoolean(conn_pk[0]);
-        result[1] = PasswordUtils.authenticate(password,conn_pk[1]);
+        result[1] = PasswordUtils.authenticate(password, conn_pk[1]);
         return result;
     }
 
@@ -157,14 +156,6 @@ public class Server {
     }
 
     public ArrayList<String> getMessages(String user, String contact) {
-        /*ArrayList<String> result = database.executeQuery("SELECT sender, timestamp, content FROM messages WHERE (sender = '" + user
-                + "' AND receiver = '" + contact + "') OR (receiver = '" + user + "' AND sender = '" + contact + "')"); //TODO : décrypter
-        ArrayList<String> messages = new ArrayList<>();
-        for (String s1 : result){
-            String s2 = s1.replace("\t","\n");
-            messages.add(s2);
-        }
-        return messages;*/
         ArrayList<String> result = database.executeQuery("SELECT sender, timestamp, content, sksender, skreceiver FROM messages WHERE (sender = '" + user
                 + "' AND receiver = '" + contact + "') OR (receiver = '" + user + "' AND sender = '" + contact + "')");
         ArrayList<String> messages = new ArrayList<>();

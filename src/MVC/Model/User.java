@@ -7,7 +7,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 
 public class User {
-    private String username, password; //à générer (pt àpd username + pw)
+    private String username, password;
 
     public User(String username, String password){
         this.username = username;
