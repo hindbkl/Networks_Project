@@ -6,7 +6,7 @@ has made an account) to see all the previous messages they send to each other, w
 ## Configuration 
 
 Java version : 
-- Java 1.8.0_292 (Amazon Corretto 8)
+- Java 1.8.0_292 (Amazon Corretto 8) (project language level : Java 8)
 
 Librairies : 
 - postgresql-42.2.20 (already in project files)
@@ -48,4 +48,13 @@ of contacts whose name containes the string. By not writing anything in the sear
 all the messages between the user and the contact (if they already talked to each other) on the right side of the page. After selecting a contact, the user can write any message on the message bar, and by clicking on the send button,
 the message is added to the list of messages above. The user can choose to click on the log out button too, which will disconnect the user and send him back to the log in page.
 
+![](https://github.com/hindbkl/Networks_Project/blob/master/images/msg.png)
+
+## Previous functional version 
+
+- Issues : 
+When adding encryption and undirect communication between client and server, unsolvable errors were raised. Before that, a version with direct access from client to server was implemented. This version can be found in commit e39ae3a1b35f0aa67e368aa424a0a3c0484af40e ("Merge remote-tracking branch 'origin/master' into master").
+
+- Direct client/server communication :
+In the version cited above, clients can register, login, and communicate from the same laptop. Here is the message view that it would give :
 ![](https://github.com/hindbkl/Networks_Project/blob/master/images/msg.png)
