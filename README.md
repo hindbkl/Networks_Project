@@ -53,8 +53,9 @@ the message is added to the list of messages above. The user can choose to click
 ## Previous functional version 
 
 - Issues : 
-When adding encryption and undirect communication between client and server, unsolvable errors were raised. Before that, a version with direct access from client to server was implemented. This version can be found in commit e39ae3a1b35f0aa67e368aa424a0a3c0484af40e ("Merge remote-tracking branch 'origin/master' into master").
+When adding encryption and undirect communication between client and server, unsolvable errors were raised. Before that, a version with direct access from client to server was implemented. This version can be found in commit e39ae3a (e39ae3a1b35f0aa67e368aa424a0a3c0484af40e - "Merge remote-tracking branch 'origin/master' into master").
 
 - Direct client/server communication :
 In the version cited above, clients can register, login, and communicate from the same laptop. Here is the message view that it would give :
+
 ![](https://github.com/hindbkl/Networks_Project/blob/master/images/msg.png)
