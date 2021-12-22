@@ -9,7 +9,7 @@ Java version :
 - Java 1.8.0_292 (Amazon Corretto 8)
 
 Librairies : 
-- postgresql -42.2.20
+- postgresql-42.2.20 (already in project files)
 
 IDE used :
 - IntelliJ IDEA 2021.3
