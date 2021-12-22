@@ -58,4 +58,4 @@ When adding encryption and undirect communication between client and server, uns
 - Direct client/server communication :
 In the version cited above, clients can register, login, and communicate from the same laptop. Here is the message view that it would give :
 
-![](https://github.com/hindbkl/Networks_Project/blob/master/images/msg.png)
+![](https://github.com/hindbkl/Networks_Project/blob/master/images/messages_ok.png)
