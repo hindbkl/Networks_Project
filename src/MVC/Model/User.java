@@ -1,18 +1,17 @@
 package MVC.Model;
 
+import Utils.Crypto.RSAUtils;
+
+import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
+
 public class User {
-    private String username, password, publickey; //à générer (pt àpd username + pw)
+    private String username, password; //à générer (pt àpd username + pw)
 
     public User(String username, String password){
         this.username = username;
         this.password = password;
-        this.publickey = "PK_test"; //TODO : generate public key
-    }
-
-    public User(String username, String password, String publickey){
-        this.username = username;
-        this.password = password;
-        this.publickey = publickey;
     }
 
     // username must start by letter, be at least 8 char long, and only contain letters and digits
@@ -48,9 +47,19 @@ public class User {
         return (cap && dig && special);
     }
 
-    public String getPublickey() {
-        return publickey;
-    } //TODO : return la public key encryptée?
+    public String getPublicKey() {
+        return Base64.getEncoder().encodeToString(RSAUtils.getPublicKeyUser(this).getEncoded());
+    }
+
+    public void generateNewKeys(){
+        try {
+            RSAUtils.generateKeys(this);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public String getUsername() {
         return username;

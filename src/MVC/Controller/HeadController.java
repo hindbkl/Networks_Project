@@ -1,7 +1,7 @@
 package MVC.Controller;
 
 import MVC.Main;
-import MVC.Model.Server;
+import MVC.Model.ClientSideServer;
 import MVC.Model.User;
 import javafx.stage.Stage;
 
@@ -13,9 +13,9 @@ public class HeadController implements LoginController.LoginListener, RegisterCo
     private LoginController loginController;
     private RegisterController registerController;
     private MessagesController messagesController;
-    private Server server;
+    private ClientSideServer server;
 
-    public HeadController(HeadListener listener, Stage stage, Server server) {
+    public HeadController(HeadListener listener, Stage stage, ClientSideServer server) {
         this.listener = listener;
         this.stage = stage;
         this.server = server;
@@ -32,6 +32,7 @@ public class HeadController implements LoginController.LoginListener, RegisterCo
     @Override
     public void onLoginAsked(User user) {
         messagesController = new MessagesController(this, stage, user, server);
+        server.update(user, messagesController);
         try {
             messagesController.show();
         } catch (IOException e) {

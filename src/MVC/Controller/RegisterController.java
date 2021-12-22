@@ -1,6 +1,6 @@
 package MVC.Controller;
 
-import MVC.Model.Server;
+import MVC.Model.ClientSideServer;
 import MVC.Model.User;
 import MVC.View.RegisterView;
 import javafx.fxml.FXMLLoader;
@@ -13,9 +13,9 @@ public class RegisterController implements RegisterView.RegisterViewListener {
     private final RegisterListener listener;
     private final Stage stage;
     private RegisterView registerView;
-    private Server server;
+    private ClientSideServer server;
 
-    public RegisterController(RegisterListener listener, Stage stage, Server server) {
+    public RegisterController(RegisterListener listener, Stage stage, ClientSideServer server) {
         this.stage = stage;
         this.listener = listener;
         this.server = server;
@@ -53,7 +53,8 @@ public class RegisterController implements RegisterView.RegisterViewListener {
             else {
                 System.out.println("create user : " + username); //TODO : delete this line
                 User user = new User(username, pw);
-                server.newUser(username, pw, user.getPublickey());
+                user.generateNewKeys();
+                server.newUser(username, pw, user.getPublicKey());
                 listener.onRegisterAsked();
             }
         }

@@ -1,16 +1,22 @@
 package MVC;
 
 import MVC.Controller.HeadController;
+import MVC.Model.ClientSideServer;
 import MVC.Model.Server;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
+import java.net.Socket;
+
 public class Main extends Application implements HeadController.HeadListener {
 
+    private static final int PORT = 9090;
+    private static final String IP = "127.0.0.1";
+
     private HeadController headController;
-    private Server server;
+    private ClientSideServer server;
 
     public static void main(String[] args) {
         launch(args);
@@ -18,7 +24,7 @@ public class Main extends Application implements HeadController.HeadListener {
 
     @Override
     public void start(Stage stage) {
-        server = new Server();
+        server = new ClientSideServer(IP,PORT);
         headController = new HeadController(this, stage, server);
         headController.show();
     }
