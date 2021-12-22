@@ -50,7 +50,6 @@ public class ClientSideServer {
     }
 
     public void updateUser(User usr) {
-        //System.out.println("CSS user = ");
         this.user = usr;
     }
 
@@ -59,6 +58,7 @@ public class ClientSideServer {
         ServerListener serverHandler = new ServerListener(this, mc);
         threadExecutor.execute(serverHandler);
         this.sv = serverHandler;
+        mc.setContacts(getContacts());
     }
 
     public void makeConnection() {
@@ -230,7 +230,6 @@ public class ClientSideServer {
         if (parsedRequest.length < 2) return false;
         String signature = parsedRequest[parsedRequest.length-1];
         String signed = request.substring(0,request.lastIndexOf("$"));
-        System.out.println(signed);//TODO
         return SignatureUtils.verify(signed,signature, RSAUtils.getPublicKeyServer());
     }
 }

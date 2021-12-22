@@ -26,7 +26,6 @@ public class MessagesController implements MessagesView.MessageViewListener {
         this.listener = listener;
         this.user = user;
         this.server = server;
-        contacts = server.getContacts();
     }
 
     public void show() throws IOException {
@@ -98,5 +97,9 @@ public class MessagesController implements MessagesView.MessageViewListener {
         if (Objects.equals(cur_receiver, contact)) {
             onContact(contact);
         }
+    }
+
+    public void setContacts(ArrayList<String[]> contacts) {
+        this.contacts = contacts;
     }
 }

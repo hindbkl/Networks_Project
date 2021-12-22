@@ -29,7 +29,7 @@ public class LoginController implements LoginView.LoginViewListener{
         loginView.setListener(this);
         Parent root = loader.getRoot();
         stage.setScene(new Scene(root));
-        stage.setTitle("Messenger app"); //TODO : change name
+        stage.setTitle("Messenger app");
         stage.show();
     }
 

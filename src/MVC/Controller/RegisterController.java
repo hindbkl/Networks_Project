@@ -52,7 +52,6 @@ public class RegisterController implements RegisterView.RegisterViewListener {
                 registerView.setErrorMessage("Username already exists.");
             }
             else {
-                System.out.println("create user : " + username); //TODO : delete this line
                 User user = new User(username, pw);
                 user.generateNewKeys();
                 TimeUnit.SECONDS.sleep(1);
